@@ -26,8 +26,6 @@ The protos here also **diverge from today's services**: e.g.
 `magnetar/pkg/api/proto/`; `scheme/gravity/gravity.proto` is the old
 `GravityService.PutTask`, not the current `AgentQueue`.
 
-For the bootc work (thesis Phases 1–5) this repository is **not involved**.
-
 ## Contents
 
 ```
@@ -43,22 +41,3 @@ gen.sh                        regeneration script
 protoc -I. --go_out=plugins=grpc:$GOPATH/src/. magnetar/magnetar.proto
 # ... see gen.sh for all services
 ```
-
-## Bugs, disabled and unfinished features
-
-- `gen.sh` uses the **pre-`protoc-gen-go` v1.4 call style**
-  (`--go_out=plugins=grpc:...`) and writes into `$GOPATH/src/`. It cannot run
-  with any current protoc/protoc-gen-go and has not been used since the
-  monorepo-import era.
-- There is **no CI/verification** that the committed `.pb.go` files match
-  their `.proto` sources.
-- The protos are frozen at the ~2022 service model and mislead anyone who
-  reads them as the current API (use the consumer repos' `pkg/api` instead).
-- `README.md` does not exist prior to this file; the workspace AGENTS.md
-  statement that "all `.proto` files live in `scheme/`" describes the old
-  layout and is no longer true.
-
-## Status
-
-Legacy — kept for the out-of-scope legacy services. Do not use for
-thesis-relevant API changes.
